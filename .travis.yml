@@ -59,7 +59,22 @@ before_script:
   - android list targets
   - ./gradlew clean
   - adb -e logcat *:W | tee logcat.log > /dev/null 2>&1 &
-
+  - if [ ${TEST} == "android" ]; then
+       echo no | android create avd --force --name test --target $ANDROID_TARGET --abi $ANDROID_ABI --sdcard 800M;
+       cat $HOME/.android/avd/test.avd/config.ini;
+       emulator -memory 4000 -avd test -no-audio -cache-size 400 -netdelay none -netspeed full -no-window &;
+       travis_wait 20 android-wait-for-emulator;
+       |
+          while ! adb shell getprop init.svc.bootanim; do
+            echo Waiting for boot animation to end
+            sleep 10
+          done
+       |
+           while ! adb shell getprop ro.build.version.sdk; do
+             echo Waiting for ro.build.version.sdk value from device
+             sleep 10
+           done
+    fi
 
 cache:
   directories:
@@ -68,9 +83,7 @@ cache:
     - $HOME/.android/build-cache
 
 script:
-     - echo "Travis branch is $TRAVIS_BRANCH"
-     - echo "Travis branch is in pull request $TRAVIS_PULL+REQUEST"
-     - travis_wait 30 ./run_tests.sh
+     - ./run_tests.sh
 
 after_failure:
     - "pandoc $TRAVIS_BUILD_DIR/sample/build/reports/androidTests/connected/index.html -t plain | sed -n '/^Failed tests/,/default-package/p'"
