@@ -58,7 +58,8 @@ before_cache:
 before_script:
   - android list targets
   - ./gradlew clean
-  - adb -e logcat *:W | tee logcat.log > /dev/null 2>&1 &
+  - ./create_avd.sh
+
 
 cache:
   directories:
@@ -69,6 +70,6 @@ cache:
 script:
      - ./run_tests.sh
 
-after_failure:
-    - "pandoc $TRAVIS_BUILD_DIR/sample/build/reports/androidTests/connected/index.html -t plain | sed -n '/^Failed tests/,/default-package/p'"
+after_script:
+    - "pandoc $TRAVIS_BUILD_DIR/parsingplayer/build/reports/androidTests/connected/index.html -t plain | sed -n '/^Failed tests/,/default-package/p'"
     - cat logcat.log; pkill -KILL -f adb
