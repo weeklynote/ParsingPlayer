@@ -20,32 +20,29 @@ if [ ${TEST} == "android" ]; then
        sleep 10
     done
     adb devices
-    adb shell svc power stayon true
     sleep 10
-    adb shell input keyevent 82
-    sleep 5
     adb shell settings put global window_animation_scale 0 &
     adb shell settings put global transition_animation_scale 0 &
     adb shell settings put global animator_duration_scale 0 &
-    ./gradlew assembleAndroidTest
+    ./gradlew connectedAndroidTest
     retval=$?
     if [ $retval -ne 0 ]; then
       echo "error on assembling, exit code: "$retval
       exit $retval
     fi
-    ./gradlew uninstallAll
-    ./gradlew installDebugAndroidTest
-    retval=$?
-    if [ $retval -ne 0 ]; then
-      echo "error on install, exit code: "$retval
-      exit $retval
-    fi
-    adb shell am instrument -w -r -e package com.hustunique.parsingplayer -e debug false com.hustunique.parsingplayer.test/android.support.test.runner.AndroidJUnitRunner
-    retval=$?
-    if [ $retval -ne 0 ]; then
-      echo "error in adb, exit code: "$retval
-      exit $retval
-    fi
+#    ./gradlew uninstallAll
+#    ./gradlew installDebugAndroidTest
+#    retval=$?
+#    if [ $retval -ne 0 ]; then
+#      echo "error on install, exit code: "$retval
+#      exit $retval
+#    fi
+#    adb shell am instrument -w -r -e package com.hustunique.parsingplayer -e debug false com.hustunique.parsingplayer.test/android.support.test.runner.AndroidJUnitRunner
+#    retval=$?
+#    if [ $retval -ne 0 ]; then
+#      echo "error in adb, exit code: "$retval
+#      exit $retval
+#    fi
 elif [${TEST} == "unit"]; then
     ./gradlew --stacktrace test
     retval=$?
