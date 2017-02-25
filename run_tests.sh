@@ -1,12 +1,24 @@
 #!/bin/bash
 echo "RUN TEST"
-./gradlew assembleDebug
+./gradlew build
 retval=$?
 if [ $retval -ne 0 ]; then
     echo "error on assembling, exit code: "$retval
     exit $retval
 fi
 if [ ${TEST} == "android" ]; then
+    echo no | android create avd --force --name test --target $ANDROID_TARGET --abi $ANDROID_ABI --sdcard 800M
+    cat $HOME/.android/avd/test.avd/config.ini
+    emulator -memory 4000 -avd test -no-audio -cache-size 400 -netdelay none -netspeed full -no-window &
+    android-wait-for-emulator
+    while ! adb shell getprop init.svc.bootanim; do
+       echo Waiting for boot animation to end
+       sleep 10
+    done
+    while ! adb shell getprop ro.build.version.sdk; do
+       echo Waiting for ro.build.version.sdk value from device
+       sleep 10
+    done
     adb devices
     adb shell svc power stayon true
     sleep 10
@@ -15,7 +27,7 @@ if [ ${TEST} == "android" ]; then
     adb shell settings put global window_animation_scale 0.0 
     adb shell settings put global transition_animation_scale 0.0
     adb shell settings put global animator_duration_scale 0.0
-    ./gradlew build assembleAndroidTest
+    ./gradlew assembleAndroidTest
     retval=$?
     if [ $retval -ne 0 ]; then
       echo "error on assembling, exit code: "$retval
@@ -35,10 +47,11 @@ if [ ${TEST} == "android" ]; then
     fi
 elif [${TEST} == "unit"]; then
     ./gradlew --stacktrace test
+    retval=$?
+    if [ $retval -ne 0 ]; then
+        echo "TEST FAILING"
+        exit $retval
+    fi
 fi
-retval=$?
-if [ $retval -ne 0 ]; then
-    echo "TEST FAILING"
-    exit $retval
-fi
+
 
