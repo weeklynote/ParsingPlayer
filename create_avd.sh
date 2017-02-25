@@ -5,7 +5,7 @@ if [ ${TEST} == "android" ]; then
     echo "runtime.network.speed=full" >> $HOME/.android/avd/test.avd/config.ini
     echo "hw.keyboard=yes" >> $HOME/.android/avd/test.avd/config.ini
     emulator -avd test -debug all -memory 4000 -noskin -no-audio -cache-size 400 -netdelay none -netspeed full -no-window -no-boot-anim &
-    ./wait_for_emulator.sh
+    android-wait-for-emulator
     adb shell input keyevent 82 &
     cat $HOME/.android/avd/test.avd/config.ini
     adb devices
