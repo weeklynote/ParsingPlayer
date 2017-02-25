@@ -64,16 +64,14 @@ before_script:
        cat $HOME/.android/avd/test.avd/config.ini;
        emulator -memory 4000 -avd test -no-audio -cache-size 400 -netdelay none -netspeed full -no-window &;
        travis_wait 20 android-wait-for-emulator;
-       |
-          while ! adb shell getprop init.svc.bootanim; do
-            echo Waiting for boot animation to end
-            sleep 10
-          done
-       |
-           while ! adb shell getprop ro.build.version.sdk; do
-             echo Waiting for ro.build.version.sdk value from device
-             sleep 10
-           done
+       while ! adb shell getprop init.svc.bootanim; do
+          echo Waiting for boot animation to end
+          sleep 10
+       done
+       while ! adb shell getprop ro.build.version.sdk; do
+          echo Waiting for ro.build.version.sdk value from device
+          sleep 10
+       done
     fi
 
 cache:
