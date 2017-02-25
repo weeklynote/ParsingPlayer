@@ -50,6 +50,10 @@ import static org.hamcrest.Matchers.not;
 @RunWith(AndroidJUnit4.class)
 public class VideoViewPlayingTest {
     private static final String TAG = "VideoViewTest";
+
+//    @ClassRule
+//    public static DisableAnimationRule sDisableAnimationRule = new DisableAnimationRule();
+
     @Rule
     public ActivityTestRule<MainActivity> mRule = new ActivityTestRule<>(MainActivity.class);
 

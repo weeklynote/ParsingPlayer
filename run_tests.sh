@@ -24,16 +24,17 @@ if [ ${TEST} == "android" ]; then
     sleep 10
     adb shell input keyevent 82
     sleep 5
-    adb shell settings put global window_animation_scale 0.0 
-    adb shell settings put global transition_animation_scale 0.0
-    adb shell settings put global animator_duration_scale 0.0
+    adb shell settings put global window_animation_scale 0 &
+    adb shell settings put global transition_animation_scale 0 &
+    adb shell settings put global animator_duration_scale 0 &
     ./gradlew assembleAndroidTest
     retval=$?
     if [ $retval -ne 0 ]; then
       echo "error on assembling, exit code: "$retval
       exit $retval
     fi
-    ./gradlew :parsingplayer:installDebugAndroidTest
+    ./gradlew uninstallAll
+    ./gradlew installDebugAndroidTest
     retval=$?
     if [ $retval -ne 0 ]; then
       echo "error on install, exit code: "$retval
