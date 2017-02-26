@@ -71,6 +71,6 @@ script:
      - ./building.sh
      - ./run_tests.sh
 
-after_script:
+after_failure:
     - "pandoc $TRAVIS_BUILD_DIR/parsingplayer/build/reports/androidTests/connected/index.html -t plain | sed -n '/^Failed tests/,/default-package/p'"
     - cat logcat.log; pkill -KILL -f adb
