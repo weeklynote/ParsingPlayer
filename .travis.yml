@@ -14,7 +14,7 @@ env:
     - TEST=android ANDROID_TARGET=android-21 ANDROID_ABI=armeabi-v7a ADB_INSTALL_TIMEOUT=10
   global:
     - ADB_INSTALL_TIMEOUT=10
-
+    - GRADLE_OPTS="-Xmx512m -XX:MaxPermSize=512m"
 
 
 sudo: required
@@ -65,7 +65,6 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
-    - $HOME/.android/build-cache
 
 script:
      - ./building.sh
