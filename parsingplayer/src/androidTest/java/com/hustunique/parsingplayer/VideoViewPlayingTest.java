@@ -38,7 +38,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static com.hustunique.parsingplayer.ParsingVideoViewMatcher.isPlaying;
 import static com.hustunique.parsingplayer.TestUtil.URL_1;
 import static com.hustunique.parsingplayer.player.view.ParsingVideoViewAction.play;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.CoreMatchers.not;
 
 /**
  * Created by JianGuo on 2/21/17.

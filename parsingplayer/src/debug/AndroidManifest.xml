@@ -17,28 +17,23 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.hustunique.parsingplayer">
+          package="com.hustunique.parsingplayer.test">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.SET_ANIMATION_SCALE"/>
     <application
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true">
         <activity
-            android:name=".player.android.VideoActivity"
+            android:name="com.hustunique.parsingplayer.player.android.VideoActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="landscape"
             android:theme="@style/FullscreenTheme">
         </activity>
-        <activity android:name=".MainActivity"
+        <activity android:name="com.hustunique.parsingplayer.MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
     </application>
+
 
 </manifest>

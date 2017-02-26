@@ -68,6 +68,7 @@ cache:
     - $HOME/.android/build-cache
 
 script:
+     - ./building.sh
      - ./run_tests.sh
 
 after_script:

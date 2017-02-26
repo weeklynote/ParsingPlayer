@@ -9,7 +9,6 @@ android {
         targetSdkVersion 25
         versionCode 2
         versionName "2.0"
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
@@ -26,6 +25,11 @@ android {
         }
         debug {
             debuggable true
+        }
+    }
+    sourceSets {
+        debug {
+            manifest.srcFile 'debug/AndroidManifest.xml'
         }
     }
 

@@ -22,6 +22,10 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.hustunique.parsingplayer.player.view.ParsingVideoView;
 
+/**
+ * Created by JianGuo on 2/26/17.
+ */
+
 public class MainActivity extends AppCompatActivity {
     private ParsingVideoView mVideoView;
     private static final String TAG = "MainActivity";

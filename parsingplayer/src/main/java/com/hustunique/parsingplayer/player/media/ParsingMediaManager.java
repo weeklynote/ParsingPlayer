@@ -319,6 +319,7 @@ public class ParsingMediaManager implements ParsingPlayerProxy.OnStateListener, 
     }
 
     private void destroyPlayerByURL(String url) {
+        LogUtil.w(TAG, "destroy url " + url);
         if (mPlayerMap.containsKey(url)) {
             ParsingPlayerProxy player = mPlayerMap.get(url);
             player.release();
