@@ -69,7 +69,7 @@ cache:
 
 script:
      - ./building.sh
-     - ./run_tests.sh
+     - travis_wait 60 ./run_tests.sh
 
 after_script:
     - "pandoc $TRAVIS_BUILD_DIR/parsingplayer/build/reports/androidTests/connected/index.html -t plain | sed -n '/^Failed tests/,/default-package/p'"
