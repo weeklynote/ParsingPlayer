@@ -18,7 +18,6 @@
 package com.hustunique.parsingplayer;
 
 import android.support.test.espresso.Espresso;
-import android.support.test.espresso.ViewInteraction;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -28,17 +27,12 @@ import com.hustunique.parsingplayer.player.media.MediaManagerIdleResource;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static com.hustunique.parsingplayer.ParsingVideoViewMatcher.isPlaying;
 import static com.hustunique.parsingplayer.TestUtil.URL_1;
 import static com.hustunique.parsingplayer.player.view.ParsingVideoViewAction.play;
-import static org.hamcrest.CoreMatchers.not;
 
 /**
  * Created by JianGuo on 2/21/17.
@@ -72,13 +66,13 @@ public class VideoViewPlayingTest {
     }
 
 
-    @Test
-    public void testWithVideoPlaying() {
-        ViewInteraction linearLayout = onView(
-                withId(R.id.controller_view));
-        linearLayout.check(matches(not(isDisplayed())));
-        onView(withId(R.id.videoView)).check(matches(isPlaying()));
-    }
+//    @Test
+//    public void testWithVideoPlaying() {
+//        ViewInteraction linearLayout = onView(
+//                withId(R.id.controller_view));
+//        linearLayout.check(matches(not(isDisplayed())));
+//        onView(withId(R.id.videoView)).check(matches(isPlaying()));
+//    }
 
 
 }
