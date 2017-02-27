@@ -4,7 +4,6 @@ if [ ${TEST} == "android" ]; then
     emulator -avd test -memory 4000 -noskin -no-audio -cache-size 400 -netfast -no-window -no-boot-anim &
     android-wait-for-emulator
     echo "EMULATOR STARTED"
-    adb shell svc power stayon true
     adb shell input keyevent 82 &
     cat $HOME/.android/avd/test.avd/config.ini
     adb devices

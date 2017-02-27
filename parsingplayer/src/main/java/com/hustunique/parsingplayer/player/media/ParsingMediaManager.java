@@ -262,6 +262,12 @@ public class ParsingMediaManager implements ParsingPlayerProxy.OnStateListener, 
         mCurrentPlayerProxy.setConcatVideos(info);
     }
 
+    @VisibleForTesting
+    void playOrigin(String uri) {
+        quickCheckInMap(uri);
+        mCurrentPlayerProxy.setVideoPath(uri);
+    }
+
     private void quickCheckInMap(String videoUrl) {
         if (mPlayerMap.containsKey(videoUrl)) {
             mCurrentPlayerProxy = mPlayerMap.get(videoUrl);
@@ -313,10 +319,6 @@ public class ParsingMediaManager implements ParsingPlayerProxy.OnStateListener, 
         mCurrentPlayerProxy.setQuality(quality);
     }
 
-    @VisibleForTesting
-    boolean isIdle() {
-        return mCurrentPlayerProxy == null || !mCurrentPlayerProxy.isInPlayBackState();
-    }
 
     private void destroyPlayerByURL(String url) {
         LogUtil.w(TAG, "destroy url " + url);

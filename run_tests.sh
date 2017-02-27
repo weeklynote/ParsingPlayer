@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "TESTING..."
 if [ ${TEST} == "android" ]; then
-    ./gradlew --stacktrace connectedAndroidTest
+    ./gradlew --stacktrace :sample:connectedAndroidTest
 elif [${TEST} == "unit"]; then
     ./gradlew --stacktrace test
 fi
