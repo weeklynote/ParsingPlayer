@@ -8,6 +8,5 @@ if [ ${TEST} == "android" ]; then
     adb shell input keyevent 82 &
     cat $HOME/.android/avd/test.avd/config.ini
     adb devices
-#    adb -e logcat *:W | tee logcat.log > /dev/null 2>&1 &
-    adb -e logcat com.hustunique.parsingplayer.test:V *:S | tee logcat.log > /dev/null 2>&1 &
+    adb -e logcat *:W | tee logcat.log > /dev/null 2>&1 &
 fi
