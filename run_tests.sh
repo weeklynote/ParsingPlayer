@@ -5,10 +5,10 @@ if [ ${TEST} == "android" ]; then
 elif [${TEST} == "unit"]; then
     ./gradlew --stacktrace test
 fi
-#retval=$?
-#if [ $retval -ne 0 ]; then
-#   echo "TEST FAILED: " $retval
-#   exit $retval
-#fi
+retval=$?
+if [ $retval -ne 0 ]; then
+   echo "TEST FAILED: " $retval
+   exit $retval
+fi
 echo "TEST DONE"
 
