@@ -9,5 +9,6 @@ if [ ${TEST} == "android" ]; then
     cat $HOME/.android/avd/test.avd/config.ini
     adb devices
     sleep 10
-    adb -e logcat *:W | tee logcat.log > /dev/null 2>&1 &
+#    adb -e logcat *:W | tee logcat.log > /dev/null 2>&1 &
+    adb -e logcat com.hustunique.parsingplayer.test:V *:S
 fi
